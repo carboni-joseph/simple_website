@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Stats</title>
+    <link rel="icon" href="https://www.raspberrypi.org/app/uploads/2020/06/cropped-raspberrry_pi_logo-100x100.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            width: 80%;
+            max-width: 700px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666;
+        }
+        .card:nth-child(odd) {
+            border-left: 5px solid #5DADE2;
+        }
+        .card:nth-child(even) {
+            border-left: 5px solid #58D68D;
+        }
+            /* Styling for the timestamp */
+    h1 i {
+        font-size: 0.6em;
+        color: #6c757d;  /* A muted color, common for placeholders or hints */
+        margin-left: 10px; /* Add a little space before the timestamp */
+    }
+        /* Responsive adjustments */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 20px; /* Slightly smaller on tablets */
+        }
+        p {
+            font-size: 14px; /* Slightly smaller on tablets */
+        }
+        .card {
+            width: 90%; /* More width for smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 18px; /* Even smaller on mobile phones */
+        }
+        p {
+            font-size: 12px; /* Smaller font size for readability on mobile */
+        }
+        body, .card {
+            width: 95%; /* Use more of the screen on small devices */
+            margin: 10px; /* Less margin on small devices */
+            height: auto; /* Allow body to grow in height */
+        }
+        .card {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Less pronounced shadow on mobile */
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Carboni's Raspberry Pi <i>{{ time }}</i></h1>
+        <br>
+        <p>Live Metrics of the Raspberry Pi 4 located in the living room.</p>
+    </div>
+    <div class="card">
+        <h1>CPU</h1>
+        {% for item in cpu %}
+        <ul>
+            <li> {{ item }} </li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="card">
+        <h1>Memory</h1>
+        {% for item in memory %}
+        <ul>
+            <li> {{ item }} </li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="card">
+        <h1>Disk</h1>
+        {% for item in disk %}
+        <ul>
+            <li> {{ item }} </li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="card">
+        <h1>Cron Jobs</h1>
+        {% for item in cron %}
+        <h3>Dynamic DNS</h3>
+        <ul>
+            <li> {{ item }} </li>
+        </ul>
+        {% endfor %}
+</body>
